@@ -20,7 +20,7 @@ On the same page where you found an API key at the right of it, you can see the 
 ***Note: Token should be kept secret***
 
 # Collection of requests
-## Happy path
+# Happy path
 1. Create a new board
 2. Get our member's data
 3. Get Boards that Members behind to
@@ -37,20 +37,21 @@ On the same page where you found an API key at the right of it, you can see the 
 14. Add a new comment to the card
 15. Delete the board
 
-## Negative testing
+# Negative testing
 1. Getting deleted board
 
-### Missing authentication
-1. Missing token
-Create a new board
+## Missing authentication
+### Missing token
+1. Create a new board
 
 ### Invalid token
 1. Create a new board
 
-### Duplication of activities
+## Duplication of activities
 1. Adding the already added member to the card
 2. Moving cards that have been already moved all cards from To Do list to Doing
 3. Removing deleted board
 
-
+# Testing technics used to checking the reliability of requirenments REST API
+In the request called 'Create a checklist in the card of corrent collection is used blackbox testing technics used to checking the reliability requirenments 
 
