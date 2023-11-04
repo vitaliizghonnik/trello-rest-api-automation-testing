@@ -52,6 +52,6 @@ On the same page where you found an API key at the right of it, you can see the 
 2. Moving cards that have been already moved all cards from To Do list to Doing
 3. Removing deleted board
 
-# Testing technics used to checking the reliability of requirenments REST API
-In the request called 'Create a checklist in the card of corrent collection is used blackbox testing technics used to checking the reliability requirenments 
+# Testing techniques used in collection
+Testing techniques that have been used to verify the compliance of requirements in Trello REST API include the software testing methodologies known as 'Data-Driven Testing' and 'Three-Value Boundary Value Analysis.' These are black-box testing techniques employed in the request called 'Create a checklist' within the current collection's card.
 
