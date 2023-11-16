@@ -1,5 +1,6 @@
 # trello-rest-api-testing
-This collection aims to test the main functionality of the Trello management tool 
+This repository contains a collection of requests created in Postman designed to test the primary functionalities of the Trello management tool. The testing process is automated using the Newman CLI to run the collection. This is facilitated through a Freestyle project in Jenkins CI/CD, which is containerized using Docker.
+
 # Introduction
 Trello is a web-based, list-making application and famous project management tool used to manage projects, organize tasks, and build team collaboration. The major idea of creating this collection trello-rest-api-testing in Postman is to test the main functionality that the Trello application allows us to do such as create/get/delete boards, create/get lists, create/get/update/move cards, add new member/comment to a card, create a checklist on a card.
 
@@ -17,7 +18,8 @@ Once you already have created a Power-Up you can generate a new **API key** that
 
 3. Generate a Token access
 On the same page where you found an API key at the right of it, you can see the hyperlinked **Token** also known as a Secret. Follow the instruction of [Authentication and Authorization section](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization).
-***Note: Token should be kept secret***
+> [!Important]
+> Token should be kept secret
 
 # Collection of requests
 # Happy path
@@ -55,3 +57,12 @@ On the same page where you found an API key at the right of it, you can see the 
 # Testing techniques used in collection
 Testing techniques that have been used to verify the compliance of requirements in Trello REST API include the software testing methodologies known as 'Data-Driven Testing' and 'Three-Value Boundary Value Analysis.' These are black-box testing techniques employed in the request called 'Create a checklist' within the current collection's card.
 
+# Automation testing using Jenkins CI/CD as a Docker container
+To execute this part, you need to have Node.js installed. You can download it from the official Node.js website. Choose the version to download (the LTS version is recommended for most users). After installation, the NPM package manager will also be installed.
+
+The next step is to install the Newman Postman collection runner via NPM, which is quite straightforward. To install Newman globally, run the following script:
+```bash $ npm install -g newman ```
+or locally, just by removing `-g` flag
+
+Finally, build a customized image in Docker using the following command:
+```docker build –t jenkins_image:0.1 - < Dockerfile .```
