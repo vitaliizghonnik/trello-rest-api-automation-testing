@@ -1,0 +1,57 @@
+[   
+    {
+        "checklistName" : "",
+        "description" : "The checklist name is represented as a string data type and has no values in itself. According to the Trello Rest API documentation the length of name should be min. 1. Therefore the expected response status should be 400 Bad Request.",
+        "validData" : false,
+        "status" : 400,
+        "expectedStatus" : 400
+    },
+    {
+        "checklistName" : "1",
+        "description" : "The checklist name is represented as a string data type and has only one character (digit) in its name. That's equalled min. amount of characters that should be consisted a name of request.",
+        "validData" : true,
+        "status" : 200,
+        "expectedStatus" : 200
+    },
+    {
+        "checklistName" : "12",
+        "description" : "The checklist name is represented as a string data type and has two characters (digits) in its name.",
+        "validData" : true,
+        "status" : 200,
+        "expectedStatus" : 200
+    },
+    {
+        "checklistName" : 0.05,
+        "description" : "The checklist name is represented as a float number data type and has 3 characters (digits) in its name.",
+        "validData" : true,
+        "status" : 200,
+        "expectedStatus" : 200
+    },
+    {
+        "checklistName" : false,
+        "description" : "The checklist's name is represented as a boolean data type.",
+        "validData" : true,
+        "status" : 200,
+        "expectedStatus" : 200
+    },
+    {
+        "checklistName" : null,
+        "description" : "The checklist's name length is represented as a null data type that means no value in the checklistName.",
+        "validData" : false,
+        "status" : 400,
+        "expectedStatus" : 400
+    },
+    {
+        "checklistName" : {"name": 1},
+        "description" : "The checklist's name is represented as a object with one pair of property and key there.",
+        "validData" : false,
+        "status" : 400,
+        "expectedStatus" : 400},
+    {
+        "checklistName" : [],
+        "description" : "The checklist's name is represented as an empty array.",
+        "validData" : false,
+        "status" : 400,
+        "expectedStatus" : 400
+    }
+]
