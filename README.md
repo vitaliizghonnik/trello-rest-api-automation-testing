@@ -1,4 +1,4 @@
-# trello-rest-api-testing
+# Trello-REST-API-Testing
 This repository contains a collection of requests created in Postman designed to test the primary functionalities of the Trello management tool. The testing process is automated using the Newman CLI to run the collection. This is facilitated through a Freestyle project in Jenkins CI/CD, which is containerized using Docker.
 
 # Introduction
@@ -18,8 +18,8 @@ Once you already have created a Power-Up you can generate a new **API key** that
 
 3. Generate a Token access
 On the same page where you found an API key at the right of it, you can see the hyperlinked **Token** also known as a Secret. Follow the instruction of [Authentication and Authorization section](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization).
-> [!Important]
-> Token should be kept secret
+> [!CAUTION]
+> > Token should be kept secret
 
 # Collection of requests
 # Happy path
@@ -57,12 +57,46 @@ On the same page where you found an API key at the right of it, you can see the 
 # Testing techniques used in collection
 Testing techniques that have been used to verify the compliance of requirements in Trello REST API include the software testing methodologies known as 'Data-Driven Testing' and 'Three-Value Boundary Value Analysis.' These are black-box testing techniques employed in the request called 'Create a checklist' within the current collection's card.
 
-# Automation testing using Jenkins CI/CD as a Docker container
-To execute this part, you need to have Node.js installed. You can download it from the official Node.js website. Choose the version to download (the LTS version is recommended for most users). After installation, the NPM package manager will also be installed.
+# Installation of Newman command-line collection runner's for Postman (if you are needed to run Postman collection in CLI)
+To execute this part, you need to have Node.js installed. You can download it from the official Node.js website. Choose the version to download (the LTS version is recommended for most users). After installation, the NPM package manager most likely will also be installed.
+The comprehensive information you can find [here](https://www.npmjs.com/package/newman) and [here](https://github.com/postmanlabs/newman)
 
 The next step is to install the Newman Postman collection runner via NPM, which is quite straightforward. To install Newman globally, run the following script:
-```bash $ npm install -g newman ```
+```
+bash $ npm install -g newman
+```
 or locally, just by removing `-g` flag
 
-Finally, build a customized image in Docker using the following command:
-```docker build –t jenkins_image:0.1 - < Dockerfile .```
+# Automation testing using Jenkins CI/CD as a Docker container
+I've created a [Dockerfile](Dockerfile) where I've customized, in my opinion, all the necessary instructions to create and manage isolated, reproducible environments for testing with dependences that stand out among others, such as: Node.js, npm package manager, HTML reporter, BlueOcean and Docker's plagins. So that, it supplies a seamless process of testing and providing some better analyze information about it.
+
+I've chosen [jenkins/jenkins](https://hub.docker.com/r/jenkins/jenkins) an official image from DockerHub as a base image, that contains a fully functional Jenkins server. Automating the build, test, and deployment processes triggered by code changes in the version control repository. It also allows adding own plugins and configuration on top of it.
+
+> [!IMPORTANT]
+> In order to make the process successful and ensure that it is up and running today with any possible changes, I strongly suggest using official resources in addition to what is attached here.
+>
+> The following instruction is designed for implementing it on Windows OS.
+>
+> For more information visit [Jenkins.io resource](https://www.jenkins.io/doc/book/installing/docker/) for instalation Docker. 
+1. Open up a command prompt window.
+1. Create a bridge network in Docker:
+```
+docker network create jenkins
+```
+Where, ```jenkins``` is a name of the network
+
+3. To create a personalized image in Docker, use the command:
+```
+docker build –t your_image_name:0.1 .
+```
+Where, `your_image_name` is the name of a custom image and `0.1` is a version of the image
+
+4. Finally, to run Docker container from image that has been created run the following command in CLI:
+```
+docker run --name your_container_name --restart=on-failure --detach --network jenkins --env DOCKER_HOST=tcp://docker:2376 --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 --volume jenkins-data:/var/jenkins_home --volume jenkins-docker-certs:/certs/client:ro --publish 8081:8080 --publish 50001:50000 -e TrelloKey=your_trello_key -e TrelloToken=your_trello_token your_image_name
+```
+Make sure to replace ```your_container_name```, ```your_trello_key```, ```your_trello_token```, ```your_image_name``` with your data.
+
+For more information visit [Jenkins.io resource](https://www.jenkins.io/doc/book/installing/docker/) for instalation Docker. 
+
+
