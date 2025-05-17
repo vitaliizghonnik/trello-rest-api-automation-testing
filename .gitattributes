@@ -1,0 +1,2 @@
+*.json linguist-language=JavaScript
+Jenkinsfile linguist-language=Groovy
